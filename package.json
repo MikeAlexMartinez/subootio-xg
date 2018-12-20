@@ -1,0 +1,38 @@
+{
+  "name": "subootio-xg",
+  "version": "0.0.1",
+  "description": "Pulls in xG Statistics for the premier league",
+  "main": "xg-parser.js",
+  "scripts": {
+    "test": "mocha \"test/**/*.spec.js\"",
+    "fetch": "node xg-parser"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikeAlexMartinez/subootio-xg.git"
+  },
+  "keywords": [
+    "node",
+    "premier",
+    "league",
+    "xG"
+  ],
+  "author": "Michael Alexander Martinez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MikeAlexMartinez/subootio-xg/issues"
+  },
+  "homepage": "https://github.com/MikeAlexMartinez/subootio-xg#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "ajv": "^5.5.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "rewire": "^4.0.1",
+    "sinon": "^7.1.1"
+  }
+}
