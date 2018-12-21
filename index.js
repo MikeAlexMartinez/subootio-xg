@@ -1,6 +1,7 @@
 'use strict';
 
 const xgParser = require('./xg-parser');
+const writeFile = require('./utils/xlsx-writer');
 
 main();
 
@@ -12,9 +13,8 @@ async function main() {
   // console.log(flatFixtureData.length);
   const { completeFixtures, remainingFixtures } = splitAndSortFixtures(flatFixtureData);
   const upcomingFixtures = nextTen(remainingFixtures);
-  const lastSixty = last60(completeFixtures);
-  const teamLastSixSummary = calculateAverageXgLastSix(lastSixty);
-  const upcomingFixturesWithLastSix = upcomingFixtures.map(f => {
+  const teamLastSixSummary = calculateAverageXgLastSix(last120(completeFixtures));
+  const upcomingFixturesWithXg = upcomingFixtures.map(f => {
     // home team
     const homeTeam = teamLastSixSummary[f.h_short_team_name];
     const h_xG_f_l6 = homeTeam.for / homeTeam.forCount;
@@ -32,7 +32,8 @@ async function main() {
     };
   });
 
-  console.log(upcomingFixturesWithLastSix);
+  console.log(upcomingFixturesWithXg);
+  writeFile(upcomingFixturesWithXg);
   return 0;
 }
 
@@ -82,8 +83,8 @@ function calculateAverageXgLastSix(fixtures) {
   return teamHash;
 }
 
-function last60(array) {
-  return array.slice(0, 60);
+function last120(array) {
+  return array.slice(0, 120);
 }
 
 function nextTen(array) {
