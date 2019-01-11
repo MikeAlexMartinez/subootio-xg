@@ -1,5 +1,5 @@
 'use strict';
-
+const fs = require('fs');
 const XLSX = require('xlsx');
 
 const wb = XLSX.utils.book_new();
@@ -38,5 +38,10 @@ module.exports = function createOutput(teamData) {
   const ws = XLSX.utils.aoa_to_sheet(data);
   XLSX.utils.book_append_sheet(wb, ws, ws_name);
 
-  XLSX.writeFile(wb, './output/output.xlsx');
+  // check output folder exists
+  const dir = `./${ws_name}`
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+  XLSX.writeFile(wb, `${dir}/output.xlsx`);
 }
